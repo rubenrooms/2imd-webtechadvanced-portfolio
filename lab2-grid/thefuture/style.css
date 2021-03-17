@@ -5,6 +5,7 @@
     align-items: center;
     justify-items: center;
     text-align: center;
+    padding: 0 1em 0;
     
 }
 
@@ -18,15 +19,36 @@
 
 .red{
     background-color: #f83259;
-    display: grid;
 }
 
 .blue{
     background-color: #63f6f2;
-    display: grid;
 }
 
 .yellow{
     background-color: #feff02;
-    display: grid;
+}
+
+
+@media (min-width: 610px){
+    .grid{
+        grid-template-columns: repeat(2, 50%);
+        grid-template-rows: repeat(5, 5em);
+    }
+}
+
+@media (min-width: 760px){
+    .grid{
+        grid-template-columns: repeat(5, 20%);
+    }
+
+    .blue{
+        grid-row: 1/4;
+        grid-column: 3/4;
+    }
+
+    .yellow{
+        grid-row: 2/4;
+        grid-column: 4/6;
+    }
 }
