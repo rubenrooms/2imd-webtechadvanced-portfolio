@@ -18,7 +18,17 @@ class Note {
       // this function should append the note to the screen somehow
     }
   
-    saveToStorage() {
+    saveToStorage(note) {
+        let localStore = window.localStorage;
+        let notes = [];
+        if(localStore.notes === undefined){
+            notes.push(note);
+            localStore.setItem("notes", JSON.stringify(notes));
+        }else{
+            notes = JSON.parse(localStore.getItem("notes"));
+            notes.push(note);
+            localStore.setItem("notes", JSON.stringify(notes));
+        }
       // HINT🤩
       // localStorage only supports strings, not arrays
       // if you want to store arrays, look at JSON.parse and JSON.stringify
@@ -37,6 +47,7 @@ class Note {
       console.log("👊🏼 The Constructor!");
       this.txtTodo = document.querySelector("#taskInput");
       this.txtTodo.addEventListener("keypress", this.createNote.bind(this));
+      this.loadNotesFromStorage();
   
       // HINT🤩
       // pressing the enter key in the text field triggers the createNote function
@@ -48,6 +59,14 @@ class Note {
     }
   
     loadNotesFromStorage() {
+        let localStore = window.localStorage;
+        let noteStore = JSON.parse(localStore.getItem("notes"));
+        if (noteStore != null){
+            noteStore.forEach( (note)=> {
+                let storeNote = new Note(note);
+                storeNote.add(storeNote.element);
+            });
+        }
       // HINT🤩
       // load all notes from storage here and add them to the screen
     }
@@ -60,6 +79,7 @@ class Note {
         let note = new Note(input);
         note.add(note.element);
         this.reset();
+        note.saveToStorage(note.title);
       }
       // this function should create a new note by using the Note() class
       // HINT🤩
