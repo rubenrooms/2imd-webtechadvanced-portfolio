@@ -59,6 +59,7 @@ class Note {
         console.log(input);
         let note = new Note(input);
         note.add(note.element);
+        this.reset();
       }
       // this function should create a new note by using the Note() class
       // HINT🤩
@@ -68,6 +69,7 @@ class Note {
   
     reset() {
       // this function should reset the form / clear the text field
+      this.txtTodo.value = "";
     }
   }
   
